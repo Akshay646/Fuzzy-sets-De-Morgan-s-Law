@@ -1,0 +1,121 @@
+//@Author : Akshay Yadav
+
+#include <bits/stdc++.h>
+#define loop(n) for(int i=0;i<n;i++)
+typedef  float f;
+using namespace std;
+
+
+void Union(f a[], f b[], int m){
+   vector<f> max(m); vector<f> min(m);
+    
+    loop(m){
+        if(a[i] > b[i])
+            max[i] = a[i];
+        else
+            max[i] = b[i];
+    }
+   // cout << "Union of Fuzzy sets A & B is=" << "\n";
+    
+    loop(m)
+        printf("%f\t", max[i]);
+    
+}
+
+void Intersection(f a[], f b[], int m){
+   vector<f> max(m); vector<f> min(m);
+    
+    loop(m){
+        if(a[i] < b[i])
+            min[i] = a[i];
+        else
+            min[i] = b[i];
+}
+    
+    loop(m)
+        printf("%f\t", min[i]);
+    
+}
+
+
+void deMorgans(f a[], f b[], int m){
+
+   f ac[m]; f bc[m];
+    
+    vector<f> min(m);
+    
+    loop(m){
+        if(a[i] < b[i])
+            min[i] = a[i];
+        else
+            min[i] = b[i];
+    }
+    
+        cout<<"Condition 1st :"<<"\n";
+    
+        cout<<"(A intersection B)^c (c-Compliment)"<<"\n";
+        loop(m)
+        printf("%f\t", 1-min[i]);
+        cout<<"\n\n";
+        
+        cout<<"A^c Union B^c "<<"\n";
+        loop(m)
+        ac[i] = 1-a[i];
+        
+        loop(m)
+        bc[i] = 1-b[i];
+        
+        Union(ac,bc,m);
+        cout<<"\n \n";
+        
+        cout<<"(A intersection B)^c == A^c Union B^c is satisfied.\n Therefore for 1st condition De-Morgan's law is verified for A and B Fuzzy sets. "<<"\n";
+        
+        cout<<"\n";
+        cout<<"\n";
+        
+        cout<<"Condition 2nd :"<<"\n";
+        
+        vector<f> max(m);
+        loop(m){
+        if(a[i] > b[i])
+            max[i] = a[i];
+        else
+            max[i] = b[i];
+    }
+        
+        cout<<"(A Union B)^c"<<"\n";
+        loop(m)
+        printf("%f\t", 1-max[i]);
+        cout<<"\n\n";
+        
+        cout<<"A^c Intersection B^c "<<"\n";
+        loop(m)
+        ac[i] = 1-a[i];
+        
+        loop(m)
+        bc[i] = 1-b[i];
+        
+        Intersection(ac,bc,m);
+        cout<<"\n \n";
+        
+        cout<<"(A Union B)^c == A^c Intersection B^c is satisfied.\n Therefore for 1st condition De-Morgan's law is verified for A and B Fuzzy sets. "<<"\n";
+      
+    } 
+        
+    
+
+signed main()
+{
+  int n;
+  cin >> n;
+  f a[n], b[n];
+  loop(n){
+      cin >> a[i];
+  }
+  
+  loop(n){
+      cin >> b[i];
+  }
+  deMorgans(a, b, n);
+  return 0;
+}
